@@ -74,6 +74,10 @@ For tracking step 1, we get the 3D bounding boxes of the object.  simply call ``
 For tracking step 2, follow the code in tracking step 2, but substitute the bbox list with the bbox list you got in tracking step 1, adding the keys to a list and passing it into the snap processing.  When calling the semantic auto annotate function, be sure to change ``gt_class`` to the class you want this object classified as.
 
 Finally, for tracking step 3, simply merge the results into the final dictionary.
+
+### Modifying stored info / Storing 3D bounding boxes
+Tracked information is handled in the ``semantic_auto_annotate`` (static objects) and ``auto_annotate_lidar`` (dynamic objects) functions.  You can modify these functions to store different data.  For example, to store 3D bounding boxes, call ``get_bounding_box(o, camera, hwc)``, with hwc being False if dynamic object and True if static object, then store it in the output dictionary.
+
 ## 4. CARLA Modifications
 
 Because DriveTruth is built on top of CARLA, modifications to CARLA are compatible with DriveTruth.  This means that the user can add new maps, vehicles, pedestrians, objects, semantic tags, and more and have DriveTruth work with them, allowing the dataset to be tailored to specific applications.
